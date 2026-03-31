@@ -6,7 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Oval - V1.4</title>
   <style>
-/* Font Orbitron cho tiêu đề (chuẩn sci-fi/radar) và JetBrains Mono cho text (chuẩn console/code) */
+    /* --- FINAL POLISH --- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, #131a26 0%, #020408 100%);
+      z-index: -1;
+    }
+    .card {
+      backdrop-filter: blur(10px);
+      background: rgba(19, 26, 38, 0.8) !important;
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+    }
+    #connect-wallet {
+      animation: pulse-cyan 2s infinite;
+    }
+    @keyframes pulse-cyan {
+      0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 242, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
+    }
+    .bar-fill { transition: width 0.8s ease; }
+
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono&display=swap');
     
     * {
@@ -16,11 +38,10 @@
     }
 
     :root {
-      /* Bơm màu Cyan chuẩn Sui Network và màu Đen vũ trụ */
       --gold: #00f2ff; 
-      --gold-light: #bcff00; /* Xanh Neon phản quang cho cảnh báo */
+      --gold-light: #bcff00; /*Neon Blue*/
       --gold-dim: #00666b;
-      --bg: #020408; /* Đen sâu thẳm */
+      --bg: #020408; /*Deep Black*/
       --bg2: #0b0e14;
       --bg3: #131a26;
       --bg4: #1c273a;
@@ -30,13 +51,13 @@
       --text-dim: #4a5c70;
       --text-mid: #708b9e;
       
-      /* Giữ nguyên màu chức năng để game không lỗi UI */
+      /* Keep the colors consistent */
       --red: #ff3366; 
       --green: #00ff99;
       --blue: #2471A3;
       --orange: #ff9900;
       
-      /* Biến thẻ bài thành màn hình kính */
+      /* Make the tarot card styles consistent */
       --tarot-paper: #0b0e14;
       --tarot-paper-deep: #020408;
       --tarot-ink: #00f2ff; 
@@ -596,7 +617,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'JetBrains Mono', monospace; /* Ép font máy tính cho toàn bộ text */
+      font-family: 'JetBrains Mono', monospace; /* Decide the font for the entire text */
       min-height: 100vh;
       overflow-x: hidden;
       background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, .04) 2px, rgba(0, 0, 0, .04) 4px);
@@ -605,7 +626,7 @@
       transform-origin: top center;
     }
 
-    /* Ghi đè font cho các tiêu đề quan trọng */
+    /* Decide font for headings */
     h1, h2, h3, .bar-label, .turn-info, .stat-impact {
       font-family: 'Orbitron', sans-serif !important;
       letter-spacing: 1px;
@@ -2553,31 +2574,31 @@
         <div id="active-directives"></div>
         <div class="bars-grid">
           <div class="bar-row bar-approval" id="brow-approval">
-            <div class="bar-label"><span>COMMAND</span><span class="bar-val" id="val-approval">50</span></div>
+            <div class="bar-label"><span>Approval</span><span class="bar-val" id="val-approval">50</span></div>
             <div class="bar-bg">
               <div class="bar-fill" id="bar-approval" style="width:50%"></div>
             </div>
           </div>
           <div class="bar-row bar-tension" id="brow-tension">
-            <div class="bar-label"><span>THREAT</span><span class="bar-val" id="val-tension">20</span></div>
+            <div class="bar-label"><span>Tension</span><span class="bar-val" id="val-tension">20</span></div>
             <div class="bar-bg">
               <div class="bar-fill" id="bar-tension" style="width:20%"></div>
             </div>
           </div>
           <div class="bar-row bar-eco" id="brow-eco">
-            <div class="bar-label"><span>RESOURCES</span><span class="bar-val" id="val-eco">70</span></div>
+            <div class="bar-label"><span>Economic</span><span class="bar-val" id="val-eco">70</span></div>
             <div class="bar-bg">
               <div class="bar-fill" id="bar-eco" style="width:70%"></div>
             </div>
           </div>
           <div class="bar-row bar-unrest" id="brow-unrest">
-            <div class="bar-label"><span>STABILITY</span><span class="bar-val" id="val-unrest">15</span></div>
+            <div class="bar-label"><span>Control</span><span class="bar-val" id="val-unrest">15</span></div>
             <div class="bar-bg">
               <div class="bar-fill" id="bar-unrest" style="width:15%"></div>
             </div>
           </div>
           <div class="bar-row bar-party" id="brow-party">
-            <div class="bar-label"><span>Party Loyalty</span><span class="bar-val" id="val-party">60</span></div>
+            <div class="bar-label"><span>Loyalty</span><span class="bar-val" id="val-party">60</span></div>
             <div class="bar-bg">
               <div class="bar-fill" id="bar-party" style="width:60%"></div>
             </div>
@@ -2585,7 +2606,7 @@
           
           <div class="bar-row bar-energy" id="brow-energy">
             <div class="bar-label">
-              <span style="color: var(--gold-light);">ENERGY CORE</span>
+              <span style="color: var(--gold-light);">Energy</span>
               <span class="bar-val" id="val-energy" style="color: var(--gold-light);">100</span>
             </div>
             <div class="bar-bg" style="border-color: var(--gold-light);">
@@ -9713,7 +9734,7 @@
         document.getElementById('val-energy').textContent = gs.energy;
         document.getElementById('bar-energy').style.width = gs.energy + '%';
         const erow = document.getElementById('brow-energy');
-        erow.classList.toggle('danger', gs.energy < 25); // Dưới 25% sẽ tự động nhấp nháy đỏ
+        erow.classList.toggle('danger', gs.energy < 25); // Under 25% will auto-flash red
       }
       
       const arcLbl = document.getElementById('arc-label-hud');
@@ -9725,14 +9746,14 @@
     // DELTA FLOATS
     // ═══════════════════════════════════════════════════════════
     function showDeltas(choice) {
-      const barKeys = ['approval', 'tension', 'eco', 'unrest', 'party', 'energy']; // Thêm energy
+      const barKeys = ['approval', 'tension', 'eco', 'unrest', 'party', 'energy']; // Add energy
       barKeys.forEach(k => {
         let delta = choice[k] || 0;
         if (!delta) return;
         const row = document.getElementById('brow-' + k);
         const el = document.createElement('span');
         el.className = 'delta-float';
-        // Khai báo tăng năng lượng là Tốt (Good)
+        // Declare energy increase as Good (Good)
         const isGood = (k === 'approval' || k === 'party' || k === 'eco' || k === 'energy') ? delta > 0 : delta < 0;
         el.classList.add(isGood ? 'delta-good' : 'delta-bad');
         el.textContent = (delta > 0 ? '+' : '') + delta;
@@ -9749,13 +9770,13 @@
     function showResultFlash(choice) {
       const rf = document.getElementById('result-flash');
       rf.innerHTML = '';
-      const barKeys = ['approval', 'tension', 'eco', 'unrest', 'party', 'energy']; // Thêm energy
+      const barKeys = ['approval', 'tension', 'eco', 'unrest', 'party', 'energy']; // Add energy
       let hasAny = false;
       barKeys.forEach(k => {
         let d = choice[k] || 0;
         if (!d) return;
         hasAny = true;
-        // Khai báo tăng năng lượng là Tốt (Good)
+        // Declare energy increase as Good (Good)
         const isGood = (k === 'approval' || k === 'party' || k === 'eco' || k === 'energy') ? d > 0 : d < 0;
         const chip = document.createElement('div');
         chip.className = 'result-chip ' + (isGood ? 'good' : 'bad');
@@ -9884,7 +9905,7 @@
         const highAuthority = gs.bars.stateAuthority >= 70;
         isGood = highAuthority ? delta < 0 : delta > 0;
       } else {
-        // Khai báo tăng năng lượng là Tốt
+        // Declare energy increase as Good (Good)
         isGood = (k === 'approval' || k === 'party' || k === 'eco' || k === 'energy') ? delta > 0 : delta < 0;
       }
       res.push({ text: `${BAR_LABELS[k]} ${(delta > 0 ? '+' : '') + delta}`, isGood });
@@ -9896,14 +9917,22 @@
       if (originalChoice && originalChoice.outcome) return originalChoice.outcome;
       const positives = [];
       const negatives = [];
-      ['approval', 'party', 'tension', 'eco', 'unrest', 'energy'].forEach(k => { // Thêm energy
-        let d = effectiveChoice[k] || 0;
-        if (!d) return;
-        // Khai báo tăng năng lượng là Tốt
-        const good = (k === 'approval' || k === 'party' || k === 'eco' || k === 'energy') ? d > 0 : d < 0;
-        const label = BAR_LABELS[k];
-        (good ? positives : negatives).push(label);
-      });
+      ['approval', 'party', 'tension', 'eco', 'unrest'].forEach(k => {
+      let d = effectiveChoice[k] || 0;
+      if (d) {
+        gs.bars[k] += d;
+        if (gs.bars[k] > 100) gs.bars[k] = 100;
+        if (gs.bars[k] < 0) gs.bars[k] = 0;
+      }
+    });
+
+    let energyDelta = effectiveChoice.energy || 0;
+    if (energyDelta) {
+      gs.energy += energyDelta;
+      if (gs.energy > 100) gs.energy = 100; // Chốt trần không cho vượt 100%
+      if (gs.energy < 0) gs.energy = 0;     // Chốt đáy không cho rớt xuống số âm
+    }
+
       if (topic === 'environment' && negatives.includes('State Control')) return 'The policy stabilizes supply quickly, but environmental and community costs spark new backlash.';
       if (positives.length && negatives.length) return `Short-term gains for ${positives.join(', ')} come with pressure on ${negatives.join(', ')}.`;
       if (positives.length) return `The move lands well and improves ${positives.join(', ')}.`;
@@ -10336,7 +10365,7 @@
       if (choice.courage) gs.courage += clamp(choice.courage * multiplier, -100, 100);
       if (choice.ideology) gs.ideologyScore += clamp(choice.ideology * multiplier, -100, 100);
       
-      /* [MỤC ĐÍCH: Cho phép thẻ bài sạc hoặc trừ thêm năng lượng] */
+      /* Allow cards to affect energy */
       if (choice.energy) {
         gs.energy += (choice.energy * multiplier);
         if (gs.energy > 100) gs.energy = 100; 
@@ -10410,17 +10439,16 @@
     }
 
     function advanceTurn() {
-      gs.energy -= 1; // Trừ 1 điểm năng lượng mỗi khi qua ngày mới
+      gs.energy += 1; // Add passive energy gain each turn
       if (gs.energy <= 0) {
         gs.energy = 0;
-        updateHUD(false); // Cập nhật màn hình lần cuối để hiển thị 0%
+        updateHUD(false); 
         
-        // Kích hoạt Ending đặc biệt của Hackathon
         showEndScreen({
           text: "CRITICAL FAILURE",
-          outcome: "ENDING: The Lazarus Protocol. Lõi năng lượng đã cạn kiệt. Trạm không gian sụp đổ. Chuẩn bị trích xuất dữ liệu di sản (Legacy Data)..."
+          outcome: "ENDING: The Lazarus Protocol. Energy core depleted. The space station has collapsed. Preparing to extract Legacy Data..."
         });
-        return; // Dừng game ngay lập tức
+        return; 
       }
       if (gs.turn >= 40 && !gs.activeArc) { showEndScreen(); return; }
       
@@ -10689,6 +10717,7 @@
       <button class="end-btn" onclick="restartGame()">Play Again</button>
       <button class="end-btn" style="border-color: #6fbcf0; color: #6fbcf0;" onclick="mockMintNFT()">💠 Mint Legacy NFT</button>
       <button class="end-btn" onclick="showGallery()">Gallery</button>
+      <button class="end-btn" style="border-color: #1DA1F2; color: #1DA1F2;" onclick="shareToX()">🐦 Share on X</button>
     </div>`;
       // Animate axis markers after brief delay
       setTimeout(() => {
@@ -10899,7 +10928,7 @@
     // WEB3 MOCK LOGIC (HACKATHON DEMO)
     // ═══════════════════════════════════════════════════════════
 
-    // GIẢ LẬP KẾT NỐI VÍ SUI
+    // MOCK SUI WALLET CONNECTION
     function mockConnect() {
       const btn = document.getElementById('connect-wallet');
       if(!btn) return;
@@ -10908,22 +10937,31 @@
       btn.style.opacity = "0.7";
       
       setTimeout(() => {
-        btn.textContent = "0x7a2d...3f1e (SUI)"; // Hiển thị địa chỉ ví giả
-        btn.style.background = "#27AE60"; // Đổi sang màu xanh lá khi thành công
+        btn.textContent = "0x7a2d...3f1e (SUI)"; 
+        btn.style.background = "#27AE60"; 
         btn.style.opacity = "1";
         btn.style.boxShadow = "0 0 20px rgba(39, 174, 96, 0.6)";
         showNotif("Wallet Connected to Sui Testnet!");
       }, 1500);
     }
 
-    // GIẢ LẬP MINT NFT KHI KẾT THÚC GAME
+    // MOCK NFT MINTING
     function mockMintNFT() {
       showNotif("Initializing SUI Protocol...");
       
       setTimeout(() => {
-        alert("🎉 SUCCESS!\n\nChiến tích của bạn đã được ghi lại vào lịch sử Trạm không gian.\nLegacy NFT 'Lazarus Fragment' đã được đúc thành công trên Sui Network.\n\nTransaction ID: 0x55b1...f9a2");
+        alert("🎉 SUCCESS!\n\nYour legacy has been permanently recorded on-chain.\nLegacy NFT 'Lazarus Fragment' minted successfully on Sui Network.\n\nTransaction ID: 0x55b1...f9a2");
         showNotif("NFT Minted Successfully!");
       }, 2000);
+    }
+
+    // SHARE TO X (TWITTER) LOGIC
+    function shareToX() {
+      const approval = gs.bars.publicApproval;
+      const economy = gs.bars.economicState;
+      const text = `I just ruled The Oval space station with an Approval Rating of ${approval}% and an Economy score of ${economy}%. Do you have what it takes to survive the @EveFrontier universe? Try my dApp now! #SuiHackathon #SUI`;
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
     }
 
     initState();
